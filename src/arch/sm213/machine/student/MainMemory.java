@@ -44,7 +44,7 @@ public class MainMemory extends AbstractMainMemory {
     return (((byteAtAddrPlus0 & 0xff) << 8 * 3)|
             ((byteAtAddrPlus1 & 0xff) << 8 * 2)|
             ((byteAtAddrPlus2 & 0xff) << 8)|
-            (byteAtAddrPlus3));
+            (byteAtAddrPlus3 & 0xff));
   }
 
   /**
@@ -55,9 +55,9 @@ public class MainMemory extends AbstractMainMemory {
   @Override public byte[] integerToBytes (int i) {
 
     return new byte[]{
-            (byte)((i >>> 8 * 3) &0xff),
-            (byte)((i >>> 8 * 2) &0xff),
-            (byte)((i >>> 8    ) &0xff),
+            (byte)((i >> 8 * 3) &0xff),
+            (byte)((i >> 8 * 2) &0xff),
+            (byte)((i >> 8    ) &0xff),
             (byte)(i)
     };
   }

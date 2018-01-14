@@ -26,9 +26,9 @@ public class MainMemoryTest {
         test1[0] = 00;
         test1[1] = 00;
         test1[2] = 00;
-        test1[3] = 80;
+        test1[3] = (byte)0x80;
 
-//       assertArrayEquals(test1, mem.integerToBytes(128)); not working
+        assertArrayEquals(test1, mem.integerToBytes(128));
 
         byte[] test2 = new byte[4];
         test2[0] = (byte) 0xff;
@@ -80,13 +80,13 @@ public class MainMemoryTest {
 
         assertEquals(01, mem.bytesToInteger((byte)00, (byte) 00, (byte) 00, (byte) 01));
 
-        assertEquals(-1, mem.bytesToInteger((byte) 0xff0, (byte) 0xff,(byte) 0xff,(byte) 0xff));
+        assertEquals(-1, mem.bytesToInteger((byte) 0xff, (byte) 0xff,(byte) 0xff,(byte) 0xff));
 
         assertEquals(256, mem.bytesToInteger((byte) 00, (byte) 00, (byte) 01, (byte) 00));
 
         assertEquals(-137, mem.bytesToInteger((byte) 0xff,(byte) 0xff,(byte) 0xff,(byte) 0x77));
 
-//        assertEquals(Integer.MAX_VALUE, mem.bytesToInteger((byte)0x7f, (byte) 0xff,(byte) 0xff, (byte) 0xff)); // not working
+        assertEquals(Integer.MAX_VALUE, mem.bytesToInteger((byte) 0x7f, (byte) 0xff,(byte) 0xff, (byte) 0xff)); // not working
 
         assertEquals(Integer.MIN_VALUE, mem.bytesToInteger((byte) 0x80, (byte) 00, (byte) 00, (byte) 00));
 
