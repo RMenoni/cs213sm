@@ -92,7 +92,7 @@ public class CPU extends AbstractSM213CPU {
                 mem.writeInteger(insOp1.get() * 4 + reg.get(insOp2.get()), reg.get(insOp0.get()));
                 break;
             case 0x4: // st rs, (rd, ri, 4) .... 4sdi
-                mem.writeInteger(reg.get(insOp1.get() + (insOp2.get() * 4)), reg.get(insOp0.get()));
+                mem.writeInteger(reg.get(insOp1.get()) + (insOp2.get() * 4), reg.get(insOp0.get()));
                 break;
             case 0x6: // ALU ................... 6-sd
                 switch (insOp0.get()) {
