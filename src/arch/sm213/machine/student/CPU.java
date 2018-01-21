@@ -92,12 +92,12 @@ public class CPU extends AbstractSM213CPU {
                 mem.writeInteger(insOp1.get() * 4 + reg.get(insOp2.get()), reg.get(insOp0.get()));
                 break;
             case 0x4: // st rs, (rd, ri, 4) .... 4sdi
-                mem.writeInteger(reg.get(insOp1.get()) + (insOp2.get() * 4), reg.get(insOp0.get()));
+                mem.writeInteger(reg.get(insOp1.get()) + (reg.get(insOp2.get()) * 0x4), reg.get(insOp0.get()));
                 break;
             case 0x6: // ALU ................... 6-sd
                 switch (insOp0.get()) {
                     case 0x0: // mov rs, rd ........ 60sd
-                        reg.set(insOp2.get(), insOp1.get());
+                        reg.set(insOp2.get(), reg.get(insOp1.get()));
                         break;
                     case 0x1: // add rs, rd ........ 61sd
                         reg.set(insOp2.get(), reg.get(insOp2.get()) + reg.get(insOp1.get()));
@@ -125,7 +125,11 @@ public class CPU extends AbstractSM213CPU {
                 }
                 break;
             case 0x7: // sh? $i,rd ............. 7dii
-                reg.set(insOp0.get(), reg.get(insOp0.get()) << insOpImm.get());
+                if(insOpImm.get() < 0) {
+                    reg.set(insOp0.get(), reg.get(insOp0.get()) >> (-1 * insOpImm.get()));
+                } else {
+                    reg.set(insOp0.get(), reg.get(insOp0.get()) << insOpImm.get());
+                }
                 break;
             case 0xf: // halt or nop ............. f?--
                 if (insOp0.get() == 0)
