@@ -163,11 +163,15 @@ public class CPU extends AbstractSM213CPU {
 	}
 	break;
       case 0x7: // sh? $i,rd ............. 7dii
+<<<<<<< Updated upstream
 <<<<<<< HEAD
           reg.set(insOp0.get(), reg.get(insOp0.get()) << insOpImm.get());
 =======
         reg.set(insOp0.get(), reg.get(insOp0.get() << insOpImm.get()));
 >>>>>>> 05f1da3959b55a2f61b6cdfd3dd54406008e6325
+=======
+        reg.set(insOp0.get(), reg.get(insOp0.get()) << insOpImm.get());
+>>>>>>> Stashed changes
         break;
       case 0xf: // halt or nop ............. f?--
 	if (insOp0.get() == 0)
